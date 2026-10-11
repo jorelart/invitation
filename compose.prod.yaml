@@ -66,31 +66,31 @@ services:
     networks:
       - laravel-production
 
-  postgres:
-    image: postgres:18
-    restart: unless-stopped
-    user: postgres
-    ports:
-      - "${POSTGRES_PORT}:5432"
-    environment:
-      - POSTGRES_DB=${POSTGRES_DATABASE}
-      - POSTGRES_USER=${POSTGRES_USERNAME}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-    volumes:
-      - postgres-data-production:/var/lib/postgresql
-    networks:
-      - laravel-production
-    # Health check for PostgreSQL
-    # -----------------------------------------------------------
-    # Health checks allow Docker to determine if a service is operational.
-    # The 'pg_isready' command checks if PostgreSQL is ready to accept connections.
-    # This prevents dependent services from starting before the database is ready.
-    # -----------------------------------------------------------
-    healthcheck:
-      test: ["CMD", "pg_isready"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+  # postgres:
+  #   image: postgres:18
+  #   restart: unless-stopped
+  #   user: postgres
+  #   ports:
+  #     - "${POSTGRES_PORT}:5432"
+  #   environment:
+  #     - POSTGRES_DB=${POSTGRES_DATABASE}
+  #     - POSTGRES_USER=${POSTGRES_USERNAME}
+  #     - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+  #   volumes:
+  #     - postgres-data-production:/var/lib/postgresql
+  #   networks:
+  #     - laravel-production
+  #   # Health check for PostgreSQL
+  #   # -----------------------------------------------------------
+  #   # Health checks allow Docker to determine if a service is operational.
+  #   # The 'pg_isready' command checks if PostgreSQL is ready to accept connections.
+  #   # This prevents dependent services from starting before the database is ready.
+  #   # -----------------------------------------------------------
+  #   healthcheck:
+  #     test: ["CMD", "pg_isready"]
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 5
 
   redis:
     image: redis:alpine
