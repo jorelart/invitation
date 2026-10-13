@@ -193,7 +193,7 @@ new class extends Component {
 
                     <!-- Error + Tombol -->
                     <div class="rsvp-field rsvp-field--btn rsvp-btn-align-stretch">
-                        <button type="submit" class="rsvp-send" data-rsvp="send" type="button">
+                        <button type="submit" class="rsvp-send" type="button">
                             <span wire:loading.remove class="rsvp-send-label">Kirim</span>
                             <span wire:loading class="rsvp-send-label">Mengirim</span>
                         </button>
