@@ -4,7 +4,7 @@
 									<div class="idb-watermark-block is-wm-order-logo_first" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.5rem;text-align:center;width:100%;max-width:100%"><span class="idb-watermark-text">Made with ❤ by Kuymase Wedding Team</span></div>								</div>
 				</div>
 				<div class="elementor-element elementor-element-7d4c8c50 elementor-widget elementor-widget-bisdev_social_icons" data-id="7d4c8c50" data-element_type="widget" data-e-type="widget" data-widget_type="bisdev_social_icons.default">
-				<div class="elementor-widget-container">
+				{{-- <div class="elementor-widget-container">
 					        <div class="idb-social-icons is-auto-columns  is-shape-circle" style="">
                                             <a
                     class="idb-social-icons__item elementor-animation-grow"
@@ -23,7 +23,7 @@
                                         target="_blank"                    rel="nofollow noopener noreferrer"                >
                     <i class="fab fa-whatsapp" aria-hidden="true"></i>                                    </a>
                     </div>
-        				</div>
+        				</div> --}}
 				</div>
 				<div class="elementor-element elementor-element-208f1d2 elementor-widget elementor-widget-bisdev_musik" data-id="208f1d2" data-element_type="widget" data-e-type="widget" data-settings="{&quot;sticky&quot;:&quot;bottom&quot;,&quot;sticky_offset&quot;:50,&quot;sticky_on&quot;:[&quot;desktop&quot;,&quot;tablet&quot;,&quot;mobile&quot;],&quot;sticky_effects_offset&quot;:0,&quot;sticky_anchor_link_offset&quot;:0}" data-widget_type="bisdev_musik.default">
 				<div class="elementor-widget-container">

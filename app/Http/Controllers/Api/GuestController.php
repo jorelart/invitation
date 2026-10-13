@@ -60,17 +60,19 @@ class GuestController extends Controller
 
     public function store(Request $request): JsonResponse
     {
+        
         $phone = $request->input('phone');
         $request->merge([
             'phone' => is_string($phone) ? preg_replace('/\D+/', '', $phone) : $phone,
-        ]);
-
-        $validated = Validator::make($request->all(), [
-            'name' => ['required', 'string', 'max:120'],
-            'phone' => ['required', 'string', 'digits_between:8,20', Rule::unique('guests', 'phone')],
-            'max_guests' => ['sometimes', 'integer', 'min:1', 'max:20'],
-        ])->validate();
-
+            ]);
+            
+            $validated = Validator::make($request->all(), [
+                'name' => ['required', 'string', 'max:120'],
+                'phone' => ['required', 'string', 'digits_between:8,20', Rule::unique('guests', 'phone')],
+                'max_guests' => ['sometimes', 'integer', 'min:1', 'max:20'],
+                ])->validate();
+                
+                // return response()->json($request->all());
         $guest = Guest::create([
             'name' => trim($validated['name']),
             'phone' => $validated['phone'],

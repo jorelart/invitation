@@ -71,7 +71,7 @@
 					        <div class="idb-social-icons is-auto-columns  is-shape-circle" style="">
                                             <a
                     class="idb-social-icons__item elementor-animation-grow"
-                    href="https://www.instagram.com/"
+                    href="https://www.instagram.com/{{ $groomInstagram }}"
                     aria-label="Instagram"
                     title="Instagram"
                     style=""
@@ -130,7 +130,7 @@
 					        <div class="idb-social-icons is-auto-columns  is-shape-circle" style="">
                                             <a
                     class="idb-social-icons__item elementor-animation-grow"
-                    href="https://www.instagram.com/"
+                    href="https://www.instagram.com/{{ $brideInstagram }}"
                     aria-label="Instagram"
                     title="Instagram"
                     style=""

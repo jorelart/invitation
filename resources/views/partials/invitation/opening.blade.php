@@ -4,26 +4,29 @@
 					</div><div class="idb-reveal idb-ef zoom-out elementor-element elementor-element-4dc6b06f e-con-full e-flex e-con e-child" data-reveal-offset="100" data-reveal-duration="2000" data-reveal-delay="11000" style="transition-duration: 2000ms; transition-delay: 11000ms;" data-id="4dc6b06f" data-element_type="container" data-e-type="container">
 				<div class="elementor-element elementor-element-272ef931 elementor-widget elementor-widget-heading" data-id="272ef931" data-element_type="widget" data-e-type="widget" data-widget_type="heading.default">
 				<div class="elementor-widget-container">
-					<h2 class="elementor-heading-title elementor-size-default">The Wedding of</h2>				</div>
+					<h2 class="elementor-heading-title elementor-size-default">The Wedding of</h2>
+				</div>
 				</div>
 				<div class="elementor-element elementor-element-411ca819 elementor-widget elementor-widget-text-editor" data-id="411ca819" data-element_type="widget" data-e-type="widget" data-widget_type="text-editor.default">
 				<div class="elementor-widget-container">
-									{{ $groomName }} <br>&amp; {{ $brideName }}								</div>
+					{{ $groomName }} <br>&amp; {{ $brideName }}
+				</div>
 				</div>
 				<div class="elementor-element elementor-element-7c4abfdc animated-slow elementor-invisible elementor-widget elementor-widget-heading" data-id="7c4abfdc" data-element_type="widget" data-e-type="widget" data-settings="{&quot;_animation&quot;:&quot;fadeInUp&quot;,&quot;_animation_delay&quot;:3000}" data-widget_type="heading.default">
 				<div class="elementor-widget-container">
-					<h2 class="elementor-heading-title elementor-size-default">28. 12. 2026</h2>				</div>
+					<h2 class="elementor-heading-title elementor-size-default">{{ $weddingDate }}</h2>
+				</div>
 				</div>
 				<div class="elementor-element elementor-element-2f567259 elementor-align-center elementor-widget elementor-widget-button" data-id="2f567259" data-element_type="widget" data-e-type="widget" data-widget_type="button.default">
 				<div class="elementor-widget-container">
-									<div class="elementor-button-wrapper">
+					<div class="elementor-button-wrapper">
 					<a class="elementor-button elementor-button-link elementor-size-xs" href="#date">
 						<span class="elementor-button-content-wrapper">
-									<span class="elementor-button-text">Save The Date</span>
+							<span class="elementor-button-text">Save The Date</span>
 					</span>
 					</a>
 				</div>
-								</div>
+			</div>
 				</div>
 				<div class="elementor-element elementor-element-26bc33dc elementor-widget elementor-widget-spacer" data-id="26bc33dc" data-element_type="widget" data-e-type="widget" data-widget_type="spacer.default">
 				<div class="elementor-widget-container">
