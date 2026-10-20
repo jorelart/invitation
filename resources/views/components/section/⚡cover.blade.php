@@ -5,6 +5,8 @@ use Livewire\Component;
 new class extends Component {
     public string $groomName;
     public string $brideName;
+    public $guest = null;
+    public ?array $photo = null;
 };
 ?>
 

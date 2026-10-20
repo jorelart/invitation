@@ -26,6 +26,7 @@ new class extends Component {
     public ?array $storyPhoto = null;
     public ?array $closingPhoto = null;
     public ?array $openingPhoto = null;
+    public ?array $coverPhoto = null;
     #[Locked]
     public Collection $rsvpComments;
 
@@ -75,6 +76,7 @@ new class extends Component {
         $this->storyPhoto = $this->photoData($photos->firstWhere('slot', 'story'));
         $this->closingPhoto = $this->photoData($photos->firstWhere('slot', 'closing'));
         $this->openingPhoto = $this->photoData($photos->firstWhere('slot', 'opening'));
+        $this->coverPhoto = $this->photoData($photos->firstWhere('slot', 'cover'));
     }
 
     private function photoData(?InvitationPhoto $photo): ?array
@@ -97,7 +99,7 @@ new class extends Component {
     <div data-elementor-type="wp-page" data-elementor-id="32120" class="elementor elementor-32120"
         data-elementor-post-type="page">
         {{-- @include('partials.invitation.cover') --}}
-        <livewire:section.cover :photo="$openingPhoto" />
+        <livewire:section.cover :photo="$coverPhoto" :groomName="$groomName" :brideName="$brideName" :guest="$guest" />
         <div class="elementor-element elementor-element-258985b9 e-con-full e-flex e-con e-parent" data-id="258985b9"
             data-element_type="container" data-e-type="container">
             @include('partials.invitation.desktop-cover')

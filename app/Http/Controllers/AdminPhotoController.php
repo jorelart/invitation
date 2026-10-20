@@ -22,7 +22,7 @@ class AdminPhotoController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
-            'slot' => ['required', Rule::in(['gallery', 'bride', 'groom', 'story', 'closing', 'opening'])],
+            'slot' => ['required', Rule::in(['gallery', 'bride', 'groom', 'story', 'closing', 'opening', 'cover'])],
             'caption' => ['nullable', 'string', 'max:255'],
             'sort_order' => ['required', 'integer', 'min:0', 'max:999'],
             'image' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:8192'],
@@ -48,7 +48,7 @@ class AdminPhotoController extends Controller
     public function update(Request $request, InvitationPhoto $photo): RedirectResponse
     {
         $validated = $request->validate([
-            'slot' => ['required', Rule::in(['gallery', 'bride', 'groom', 'story', 'closing', 'opening'])],
+            'slot' => ['required', Rule::in(['gallery', 'bride', 'groom', 'story', 'closing', 'opening', 'cover'])],
             'caption' => ['nullable', 'string', 'max:255'],
             'sort_order' => ['required', 'integer', 'min:0', 'max:999'],
             'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:8192'],

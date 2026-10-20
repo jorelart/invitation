@@ -21,6 +21,7 @@
                 <option value="story">Foto cerita pasangan</option>
                 <option value="closing">Foto penutup</option>
                 <option value="opening">Foto halaman pembuka</option>
+                <option value="cover">Foto cover undangan</option>
             </select></div>
             <div><label for="caption">Keterangan / teks alternatif</label><input id="caption" name="caption" value="{{ old('caption') }}" maxlength="255"></div>
             <div><label for="sort_order">Urutan (galeri)</label><input id="sort_order" name="sort_order" type="number" min="0" max="999" value="{{ old('sort_order', 10) }}" required></div>
@@ -45,6 +46,7 @@
                             <option value="story" @selected($photo->slot === 'story')>Foto cerita pasangan</option>
                             <option value="closing" @selected($photo->slot === 'closing')>Foto penutup</option>
                             <option value="opening" @selected($photo->slot === 'opening')>Foto halaman pembuka</option>
+                            <option value="cover" @selected($photo->slot === 'cover')>Foto cover undangan</option>
                         </select>
                         <label for="caption-{{ $photo->id }}">Keterangan / teks alternatif</label>
                         <input id="caption-{{ $photo->id }}" name="caption" value="{{ $photo->caption }}" maxlength="255">
