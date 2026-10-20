@@ -28,14 +28,18 @@
         <meta property="og:type" content="article" />
         <meta property="og:title" content="{{ $title }}" />
         <meta property="og:description" content="{{ $description }}" />
-        <meta property="og:url" content="./" />
+        <meta property="og:url" content="{{ url()->current() }}" />
         <meta property="og:site_name" content="{{ $title }}" />
         <meta property="article:modified_time" content="2026-09-14T01:26:05+00:00" />
         <meta property="og:image" content="{{ $cover['url'] }}" />
-        <meta property="og:image:width" content="1076" />
-        <meta property="og:image:height" content="1080" />
-        <meta property="og:image:type" content="image/webp" />
+        <meta property="og:image:secure_url" content="{{ $cover['url'] }}" />
+        <meta property="og:image:alt" content="{{ $cover['caption'] }}" />
+        <meta property="og:image:width" content="{{ $cover['width'] }}" />
+        <meta property="og:image:height" content="{{ $cover['height'] }}" />
         <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="{{ $title }}" />
+        <meta name="twitter:description" content="{{ $description }}" />
+        <meta name="twitter:image" content="{{ $cover['url'] }}" />
         <meta name="twitter:label1" content="Estimasi waktu membaca" />
         <meta name="twitter:data1" content="1 menit" />
         <!-- / Yoast SEO plugin. -->
