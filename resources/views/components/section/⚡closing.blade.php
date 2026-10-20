@@ -5,11 +5,13 @@ use Livewire\Component;
 new class extends Component {
     public string $groomName;
     public string $brideName;
+    public ?array $photo = null;
 
-    public function mount($groomName, $brideName)
+    public function mount($groomName, $brideName, ?array $photo = null)
     {
         $this->groomName = $groomName;
         $this->brideName = $brideName;
+        $this->photo = $photo;
     }
 };
 ?>
@@ -26,11 +28,10 @@ new class extends Component {
                 style="transition-duration: 2000ms;" data-id="6c183bdb" data-element_type="widget" data-e-type="widget"
                 data-widget_type="image.default">
                 <div class="elementor-widget-container">
-                    <img fetchpriority="high" decoding="async" width="875" height="1130"
-                        src="assets/vendor/site/wp-content/uploads/2026/06/25KN154_AKHIR-e1761191657903.jpg"
-                        class="attachment-full size-full wp-image-34076" alt=""
-                        srcset="assets/vendor/site/wp-content/uploads/2026/06/25KN154_AKHIR-e1761191657903.jpg 875w, assets/vendor/site/wp-content/uploads/2026/06/25KN154_AKHIR-e1761191657903-232x300.jpg 232w, assets/vendor/site/wp-content/uploads/2026/06/25KN154_AKHIR-e1761191657903-793x1024.jpg 793w, assets/vendor/site/wp-content/uploads/2026/06/25KN154_AKHIR-e1761191657903-768x992.jpg 768w"
-                        sizes="(max-width: 875px) 100vw, 875px" />
+                    @if ($photo)
+                        <img fetchpriority="high" decoding="async" width="{{ $photo['width'] }}" height="{{ $photo['height'] }}"
+                            src="{{ $photo['url'] }}" class="attachment-full size-full wp-image-34076" alt="{{ $photo['caption'] }}" />
+                    @endif
                 </div>
             </div>
             <div class="idb-reveal idb-ef zoom-down elementor-element elementor-element-43bb9c9d elementor-widget elementor-widget-text-editor"

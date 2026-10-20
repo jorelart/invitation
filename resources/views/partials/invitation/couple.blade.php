@@ -24,7 +24,9 @@
 		<div class="elementor-element elementor-element-70b6e0c e-con-full e-flex e-con e-child" data-id="70b6e0c" data-element_type="container" data-e-type="container">
 				<div class="idb-reveal idb-ef zoom-down elementor-element elementor-element-227ec4ee fra elementor-widget elementor-widget-image" data-reveal-offset="100" data-reveal-duration="2000" data-reveal-delay="0" style="transition-duration: 2000ms;" data-id="227ec4ee" data-element_type="widget" data-e-type="widget" data-widget_type="image.default">
 				<div class="elementor-widget-container">
-															<img decoding="async" width="1024" height="1535" src="assets/vendor/site/wp-content/uploads/2026/06/25KN154_PROFIL_.jpg" class="attachment-full size-full wp-image-34079" alt="" srcset="assets/vendor/site/wp-content/uploads/2026/06/25KN154_PROFIL_.jpg 1024w, assets/vendor/site/wp-content/uploads/2026/06/25KN154_PROFIL_-200x300.jpg 200w, assets/vendor/site/wp-content/uploads/2026/06/25KN154_PROFIL_-683x1024.jpg 683w, assets/vendor/site/wp-content/uploads/2026/06/25KN154_PROFIL_-768x1151.jpg 768w" sizes="(max-width: 1024px) 100vw, 1024px" />															</div>
+															@if ($groomPhoto)
+<img decoding="async" width="{{ $groomPhoto['width'] }}" height="{{ $groomPhoto['height'] }}" src="{{ $groomPhoto['url'] }}" class="attachment-full size-full wp-image-34079" alt="{{ $groomPhoto['caption'] }}" />
+@endif															</div>
 				</div>
 				<div class="idb-reveal idb-ef zoom-in elementor-element elementor-element-13a3d576 elementor-widget__width-inherit elementor-absolute fla1 elementor-widget elementor-widget-image" data-reveal-offset="100" data-reveal-duration="2000" data-reveal-delay="500" style="transition-duration: 2000ms; transition-delay: 500ms;" data-id="13a3d576" data-element_type="widget" data-e-type="widget" data-settings="{&quot;_position&quot;:&quot;absolute&quot;}" data-widget_type="image.default">
 				<div class="elementor-widget-container">
@@ -87,7 +89,9 @@
 		<div class="elementor-element elementor-element-36d0c352 e-con-full e-flex e-con e-child" data-id="36d0c352" data-element_type="container" data-e-type="container">
 				<div class="idb-reveal idb-ef zoom-down elementor-element elementor-element-424f619 fra elementor-widget elementor-widget-image" data-reveal-offset="100" data-reveal-duration="2000" data-reveal-delay="0" style="transition-duration: 2000ms;" data-id="424f619" data-element_type="widget" data-e-type="widget" data-widget_type="image.default">
 				<div class="elementor-widget-container">
-															<img loading="lazy" decoding="async" width="1024" height="1535" src="assets/vendor/site/wp-content/uploads/2026/06/25KN154_PROFIL.jpg" class="attachment-full size-full wp-image-34086" alt="" srcset="assets/vendor/site/wp-content/uploads/2026/06/25KN154_PROFIL.jpg 1024w, assets/vendor/site/wp-content/uploads/2026/06/25KN154_PROFIL-200x300.jpg 200w, assets/vendor/site/wp-content/uploads/2026/06/25KN154_PROFIL-683x1024.jpg 683w, assets/vendor/site/wp-content/uploads/2026/06/25KN154_PROFIL-768x1151.jpg 768w" sizes="(max-width: 1024px) 100vw, 1024px" />															</div>
+															@if ($bridePhoto)
+<img loading="lazy" decoding="async" width="{{ $bridePhoto['width'] }}" height="{{ $bridePhoto['height'] }}" src="{{ $bridePhoto['url'] }}" class="attachment-full size-full wp-image-34086" alt="{{ $bridePhoto['caption'] }}" />
+@endif															</div>
 				</div>
 				<div class="idb-reveal idb-ef zoom-in elementor-element elementor-element-2084917e elementor-widget__width-inherit elementor-absolute fla1 elementor-widget elementor-widget-image" data-reveal-offset="100" data-reveal-duration="2000" data-reveal-delay="500" style="transition-duration: 2000ms; transition-delay: 500ms;" data-id="2084917e" data-element_type="widget" data-e-type="widget" data-settings="{&quot;_position&quot;:&quot;absolute&quot;}" data-widget_type="image.default">
 				<div class="elementor-widget-container">

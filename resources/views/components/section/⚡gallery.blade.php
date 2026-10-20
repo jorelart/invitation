@@ -3,7 +3,12 @@
 use Livewire\Component;
 
 new class extends Component {
-    //
+    public array $photos = [];
+
+    public function mount(array $photos): void
+    {
+        $this->photos = $photos;
+    }
 };
 ?>
 
@@ -55,72 +60,19 @@ new class extends Component {
         data-widget_type="gallery.default">
         <div class="elementor-widget-container">
             <div class="elementor-gallery__container">
-                <a class="e-gallery-item elementor-gallery-item elementor-animated-content"
-                    href="assets/vendor/site/wp-content/uploads/2026/06/25KN154_2-3-e1761191599275.jpg"
-                    data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="89b880a"
-                    data-elementor-lightbox-title="assets/vendor/site/wp-content/uploads/2026/06/25KN154_2-3-e1761191599275.jpg"
-                    data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MzQxMDIsInVybCI6Imh0dHBzOlwvXC9pbnYucHVuYWthd2FuZGlnaXRhbC5pZFwvd3AtY29udGVudFwvdXBsb2Fkc1wvMjAyNlwvMDZcLzI1S04xNTRfMi0zLWUxNzYxMTkxNTk5Mjc1LmpwZyIsInNsaWRlc2hvdyI6Ijg5Yjg4MGEifQ%3D%3D">
-                    <div class="e-gallery-image elementor-gallery-item__image"
-                        data-thumbnail="assets/vendor/site/wp-content/uploads/2026/06/25KN154_2-3-e1761191599275.jpg"
-                        data-width="885" data-height="1535" aria-label="" role="img"
-                        style="background-image: url('assets/vendor/site/wp-content/uploads/2026/06/25KN154_2-3-e1761191599275.jpg');">
-                    </div>
-                </a>
-                <a class="e-gallery-item elementor-gallery-item elementor-animated-content"
-                    href="assets/vendor/site/wp-content/uploads/2026/06/25KN154_1-1.jpg"
-                    data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="89b880a"
-                    data-elementor-lightbox-title="assets/vendor/site/wp-content/uploads/2026/06/25KN154_1-1.jpg"
-                    data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MzQxMDQsInVybCI6Imh0dHBzOlwvXC9pbnYucHVuYWthd2FuZGlnaXRhbC5pZFwvd3AtY29udGVudFwvdXBsb2Fkc1wvMjAyNlwvMDZcLzI1S04xNTRfMS0xLmpwZyIsInNsaWRlc2hvdyI6Ijg5Yjg4MGEifQ%3D%3D">
-                    <div class="e-gallery-image elementor-gallery-item__image"
-                        data-thumbnail="assets/vendor/site/wp-content/uploads/2026/06/25KN154_1-1.jpg" data-width="1024"
-                        data-height="1535" aria-label="" role="img"
-                        style="background-image: url('assets/vendor/site/wp-content/uploads/2026/06/25KN154_1-1.jpg');">
-                    </div>
-                </a>
-                <a class="e-gallery-item elementor-gallery-item elementor-animated-content"
-                    href="assets/vendor/site/wp-content/uploads/2026/06/25KN154_1-2.jpg"
-                    data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="89b880a"
-                    data-elementor-lightbox-title="assets/vendor/site/wp-content/uploads/2026/06/25KN154_1-2.jpg"
-                    data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MzQxMDYsInVybCI6Imh0dHBzOlwvXC9pbnYucHVuYWthd2FuZGlnaXRhbC5pZFwvd3AtY29udGVudFwvdXBsb2Fkc1wvMjAyNlwvMDZcLzI1S04xNTRfMS0yLmpwZyIsInNsaWRlc2hvdyI6Ijg5Yjg4MGEifQ%3D%3D">
-                    <div class="e-gallery-image elementor-gallery-item__image"
-                        data-thumbnail="assets/vendor/site/wp-content/uploads/2026/06/25KN154_1-2.jpg" data-width="1024"
-                        data-height="1535" aria-label="" role="img"
-                        style="background-image: url('assets/vendor/site/wp-content/uploads/2026/06/25KN154_1-2.jpg');">
-                    </div>
-                </a>
-                <a class="e-gallery-item elementor-gallery-item elementor-animated-content"
-                    href="assets/vendor/site/wp-content/uploads/2026/06/25KN154_1-3.jpg"
-                    data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="89b880a"
-                    data-elementor-lightbox-title="assets/vendor/site/wp-content/uploads/2026/06/25KN154_1-3.jpg"
-                    data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MzQxMDcsInVybCI6Imh0dHBzOlwvXC9pbnYucHVuYWthd2FuZGlnaXRhbC5pZFwvd3AtY29udGVudFwvdXBsb2Fkc1wvMjAyNlwvMDZcLzI1S04xNTRfMS0zLmpwZyIsInNsaWRlc2hvdyI6Ijg5Yjg4MGEifQ%3D%3D">
-                    <div class="e-gallery-image elementor-gallery-item__image"
-                        data-thumbnail="assets/vendor/site/wp-content/uploads/2026/06/25KN154_1-3.jpg"
-                        data-width="1024" data-height="1535" aria-label="" role="img"
-                        style="background-image: url('assets/vendor/site/wp-content/uploads/2026/06/25KN154_1-3.jpg');">
-                    </div>
-                </a>
-                <a class="e-gallery-item elementor-gallery-item elementor-animated-content"
-                    href="assets/vendor/site/wp-content/uploads/2026/06/25KN154_2-1.jpg"
-                    data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="89b880a"
-                    data-elementor-lightbox-title="assets/vendor/site/wp-content/uploads/2026/06/25KN154_2-1.jpg"
-                    data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MzQxMDksInVybCI6Imh0dHBzOlwvXC9pbnYucHVuYWthd2FuZGlnaXRhbC5pZFwvd3AtY29udGVudFwvdXBsb2Fkc1wvMjAyNlwvMDZcLzI1S04xNTRfMi0xLmpwZyIsInNsaWRlc2hvdyI6Ijg5Yjg4MGEifQ%3D%3D">
-                    <div class="e-gallery-image elementor-gallery-item__image"
-                        data-thumbnail="assets/vendor/site/wp-content/uploads/2026/06/25KN154_2-1.jpg"
-                        data-width="1024" data-height="1535" aria-label="" role="img"
-                        style="background-image: url('assets/vendor/site/wp-content/uploads/2026/06/25KN154_2-1.jpg');">
-                    </div>
-                </a>
-                <a class="e-gallery-item elementor-gallery-item elementor-animated-content"
-                    href="assets/vendor/site/wp-content/uploads/2026/06/25KN154_2-2.jpg"
-                    data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="89b880a"
-                    data-elementor-lightbox-title="assets/vendor/site/wp-content/uploads/2026/06/25KN154_2-2.jpg"
-                    data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MzQwNzMsInVybCI6Imh0dHBzOlwvXC9pbnYucHVuYWthd2FuZGlnaXRhbC5pZFwvd3AtY29udGVudFwvdXBsb2Fkc1wvMjAyNlwvMDZcLzI1S04xNTRfMi0yLmpwZyIsInNsaWRlc2hvdyI6Ijg5Yjg4MGEifQ%3D%3D">
-                    <div class="e-gallery-image elementor-gallery-item__image"
-                        data-thumbnail="assets/vendor/site/wp-content/uploads/2026/06/25KN154_2-2.jpg"
-                        data-width="1024" data-height="1535" aria-label="" role="img"
-                        style="background-image: url('assets/vendor/site/wp-content/uploads/2026/06/25KN154_2-2.jpg');">
-                    </div>
-                </a>
+                                @foreach ($photos as $photo)
+                    <a class="e-gallery-item elementor-gallery-item elementor-animated-content"
+                        href="{{ $photo['url'] }}"
+                        data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="89b880a"
+                        data-elementor-lightbox-title="{{ $photo['caption'] }}">
+                        <div class="e-gallery-image elementor-gallery-item__image"
+                            data-thumbnail="{{ $photo['url'] }}"
+                            data-width="{{ $photo['width'] }}" data-height="{{ $photo['height'] }}"
+                            aria-label="{{ $photo['caption'] }}" role="img"
+                            style="background-image: url('{{ $photo['url'] }}');">
+                        </div>
+                    </a>
+                @endforeach
             </div>
         </div>
     </div>

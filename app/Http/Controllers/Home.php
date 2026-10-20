@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Guest;
+use App\Models\InvitationSetting;
 use App\Models\Rsvp;
 use Illuminate\Http\Request;
 
@@ -12,8 +13,10 @@ class Home extends Controller
 
     public function __construct()
     {
+        $settings = InvitationSetting::query()->where('key', 'home')->firstOrFail()->value;
+
         $this->data = [
-            'title' => 'Undangan Website Premium 06',
+            ...$settings,
             'guest' => Guest::where('invitation_token', request()->query('inv'))->first(),
             'rsvpComments' => Rsvp::with('guest')->get()
         ];

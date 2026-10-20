@@ -3,7 +3,12 @@
 use Livewire\Component;
 
 new class extends Component {
-    //
+    public ?array $photo = null;
+
+    public function mount(?array $photo = null): void
+    {
+        $this->photo = $photo;
+    }
 };
 ?>
 
@@ -43,11 +48,10 @@ new class extends Component {
             style="transition-duration: 2000ms;" data-id="7a3396c4" data-element_type="widget" data-e-type="widget"
             data-widget_type="image.default">
             <div class="elementor-widget-container">
-                <img loading="lazy" decoding="async" width="1023" height="1023"
-                    src="assets/vendor/site/wp-content/uploads/2026/06/25KN154_AWAL-Copy-e1761191408395.jpg"
-                    class="attachment-full size-full wp-image-34100" alt=""
-                    srcset="assets/vendor/site/wp-content/uploads/2026/06/25KN154_AWAL-Copy-e1761191408395.jpg 1023w, assets/vendor/site/wp-content/uploads/2026/06/25KN154_AWAL-Copy-e1761191408395-300x300.jpg 300w, assets/vendor/site/wp-content/uploads/2026/06/25KN154_AWAL-Copy-e1761191408395-150x150.jpg 150w, assets/vendor/site/wp-content/uploads/2026/06/25KN154_AWAL-Copy-e1761191408395-768x768.jpg 768w"
-                    sizes="(max-width: 1023px) 100vw, 1023px" />
+                @if ($photo)
+                    <img loading="lazy" decoding="async" width="{{ $photo['width'] }}" height="{{ $photo['height'] }}"
+                        src="{{ $photo['url'] }}" class="attachment-full size-full wp-image-34100" alt="{{ $photo['caption'] }}" />
+                @endif
             </div>
         </div>
         <div class="elementor-element elementor-element-451d76b5 elementor-widget elementor-widget-spacer"

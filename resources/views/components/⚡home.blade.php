@@ -1,6 +1,8 @@
 <?php
 
 use App\Models\Guest;
+use App\Models\InvitationSetting;
+use App\Models\InvitationPhoto;
 use App\Models\Rsvp;
 use Illuminate\Database\Eloquent\Collection;
 use Livewire\Attributes\Layout;
@@ -9,16 +11,21 @@ use Livewire\Component;
 
 new class extends Component {
     #[Layout('layouts.app')]
-    public string $title = 'Undangan Website Premium 06';
+    public string $title;
 
     #[Locked]
     public ?Guest $guest = null;
 
     #[Locked]
     public ?string $token = null;
-    public ?string $guuestName;
     public ?string $brideName, $brideFullName, $brideInstagram, $brideParent, $groomName, $groomFullName, $groomInstagram, $groomParent, $weddingDate, $weddingTime, $weddingLocation, $weddingMapLink, $weddingAddress, $receptionDate, $receptionTime, $receptionLocation, $receptionAddress, $receptionMapLink;
     public array $events = [];
+    public array $galleryPhotos = [];
+    public ?array $bridePhoto = null;
+    public ?array $groomPhoto = null;
+    public ?array $storyPhoto = null;
+    public ?array $closingPhoto = null;
+    public ?array $openingPhoto = null;
     #[Locked]
     public Collection $rsvpComments;
 
@@ -27,49 +34,54 @@ new class extends Component {
         $inv = request()->query('inv');
         $this->token = is_string($inv) && preg_match('/^[A-Za-z0-9]{64}$/', $inv) ? $inv : null;
         $this->guest = $this->token ? Guest::where('invitation_token', $this->token)->first() : null;
-        $this->brideName = 'Vya';
-        $this->brideFullName = 'Utami Alivya Widyawati, S.Tr.Keb.,Bd.';
-        $this->brideInstagram = 'utamialivyaa_';
-        $this->brideParent = 'Putra Kedua dari (Alm) Bapak Widarto & Ibu Riswati';
-        $this->groomName = 'Fairuz';
-        $this->groomFullName = 'Fairuz Akbar Dani Swara, S.H.';
-        $this->groomInstagram = 'fairuzdanis';
-        $this->groomParent = 'Putra Pertama dari Bapak Tri Hariyanto & Ibu Sri haryanti';
-        $this->weddingDate = '16 November 2026';
-        $this->weddingTime = '09:00 WIB';
-        $this->weddingLocation = 'Kediaman Mempelai Wanita';
-        $this->weddingAddress = 'Gedung TEA Desa Treko, Jl. Candimulyo, Treko I, Treko, Kec. Mungkid, Kabupaten Magelang, Jawa Tengah 56512';
-        $this->weddingMapLink = 'https://maps.google.com/?q=Rumah+Makan';
-        $this->receptionDate = '16 November 2026';
-        $this->receptionTime = '12:00 WIB';
-        $this->receptionLocation = 'Kediaman Mempelai Wanita';
-        $this->receptionAddress = 'Gedung TEA Desa Treko, Jl. Candimulyo, Treko I, Treko, Kec. Mungkid, Kabupaten Magelang, Jawa Tengah 56512';
-        $this->receptionMapLink = 'https://maps.google.com/?q=Rumah+Makan';
-        $this->events = [
-            [
-                'name' => 'Akad Nikah',
-                'date' => $this->weddingDate,
-                'time' => $this->weddingTime . ' WIB',
-                'location' => $this->weddingLocation,
-                'address' => $this->weddingAddress,
-                'map_link' => $this->weddingMapLink
-            ],
-            [
-                'name' => 'Resepsi Sesi 1',
-                'date' => $this->receptionDate,
-                'time' => $this->receptionTime . ' WIB s/d ' . Carbon\Carbon::parse($this->receptionTime)->addHours(1)->format('H:i') . ' WIB',
-                'location' => $this->receptionLocation,
-                'address' => $this->receptionAddress,
-                'map_link' => $this->receptionMapLink
-            ],
-            [
-                'name' => 'Resepsi Sesi 2',
-                'date' => $this->receptionDate,
-                'time' => Carbon\Carbon::parse($this->receptionTime)->addHours(1)->format('H:i') . ' WIB s/d Selesai',
-                'location' => $this->receptionLocation,
-                'address' => $this->receptionAddress,
-                'map_link' => $this->receptionMapLink
-            ]
+        $settings = InvitationSetting::query()->where('key', 'home')->firstOrFail()->value;
+
+        $this->title = $settings['title'];
+        $this->brideName = $settings['brideName'];
+        $this->brideFullName = $settings['brideFullName'];
+        $this->brideInstagram = $settings['brideInstagram'];
+        $this->brideParent = $settings['brideParent'];
+        $this->groomName = $settings['groomName'];
+        $this->groomFullName = $settings['groomFullName'];
+        $this->groomInstagram = $settings['groomInstagram'];
+        $this->groomParent = $settings['groomParent'];
+        $this->weddingDate = $settings['weddingDate'];
+        $this->weddingTime = $settings['weddingTime'];
+        $this->weddingLocation = $settings['weddingLocation'];
+        $this->weddingAddress = $settings['weddingAddress'];
+        $this->weddingMapLink = $settings['weddingMapLink'];
+        $this->receptionDate = $settings['receptionDate'];
+        $this->receptionTime = $settings['receptionTime'];
+        $this->receptionLocation = $settings['receptionLocation'];
+        $this->receptionAddress = $settings['receptionAddress'];
+        $this->receptionMapLink = $settings['receptionMapLink'];
+        $this->events = $settings['events'];
+
+        $photos = InvitationPhoto::query()->orderBy('sort_order')->orderBy('id')->get();
+        $this->galleryPhotos = $photos->where('slot', 'gallery')->map(fn (InvitationPhoto $photo): array => [
+            'url' => $photo->url,
+            'caption' => $photo->caption ?? '',
+            'width' => $photo->width ?? 1024,
+            'height' => $photo->height ?? 1535,
+        ])->values()->all();
+        $this->bridePhoto = $this->photoData($photos->firstWhere('slot', 'bride'));
+        $this->groomPhoto = $this->photoData($photos->firstWhere('slot', 'groom'));
+        $this->storyPhoto = $this->photoData($photos->firstWhere('slot', 'story'));
+        $this->closingPhoto = $this->photoData($photos->firstWhere('slot', 'closing'));
+        $this->openingPhoto = $this->photoData($photos->firstWhere('slot', 'opening'));
+    }
+
+    private function photoData(?InvitationPhoto $photo): ?array
+    {
+        if (! $photo) {
+            return null;
+        }
+
+        return [
+            'url' => $photo->url,
+            'caption' => $photo->caption ?? '',
+            'width' => $photo->width ?? 1024,
+            'height' => $photo->height ?? 1024,
         ];
     }
 };
@@ -86,14 +98,14 @@ new class extends Component {
 
             <div class="elementor-element elementor-element-6626d23e e-con-full e-flex e-con e-child" data-id="6626d23e"
                 data-element_type="container" data-e-type="container">
-                <livewire:section.opening :groomName="$groomName" :brideName="$brideName" :weddingDate="$weddingDate" />
-                @include('partials.invitation.couple')
+                <livewire:section.opening :groomName="$groomName" :brideName="$brideName" :weddingDate="$weddingDate" :photo="$openingPhoto" />
+                @include('partials.invitation.couple', ['bridePhoto' => $bridePhoto, 'groomPhoto' => $groomPhoto])
                 <livewire:section.save-the-date :weddingDate="$weddingDate" />
                 <livewire:section.event :events="$events" :weddingDate="$weddingDate" :weddingTime="$weddingTime" :weddingLocation="$weddingLocation"
                     :weddingAddress="$weddingAddress" :weddingMapLink="$weddingMapLink" :receptionDate="$receptionDate" :receptionTime="$receptionTime" :receptionLocation="$receptionLocation"
                     :receptionAddress="$receptionAddress" :receptionMapLink="$receptionMapLink" />
-                <livewire:section.love-story />
-                <livewire:section.gallery />
+                <livewire:section.love-story :photo="$storyPhoto" />
+                <livewire:section.gallery :photos="$galleryPhotos" />
 
                 <div class="elementor-element elementor-element-51cdfcef e-con-full e-flex e-con e-child"
                     data-id="51cdfcef" data-element_type="container" data-e-type="container"
@@ -102,7 +114,7 @@ new class extends Component {
                     <livewire:section.rsvp :guest="$guest" :rsvpComments="$rsvpComments" />
                 </div>
 
-                <livewire:section.closing :groomName="$groomName" :brideName="$brideName" />
+                <livewire:section.closing :groomName="$groomName" :brideName="$brideName" :photo="$closingPhoto" />
                 @include('partials.invitation.footer')
             </div>
         </div>
