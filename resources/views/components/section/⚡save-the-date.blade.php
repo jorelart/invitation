@@ -3,7 +3,7 @@
 use Livewire\Component;
 
 new class extends Component {
-    public $targetDate, $targetTime, $hari, $jam, $menit, $detik;
+    public $targetDate, $targetTime, $hari, $jam, $menit, $detik, $photo;
 
     public function mount($weddingDate)
     {
@@ -22,7 +22,8 @@ new class extends Component {
 <div>
     <div class="elementor-element elementor-element-73ea38e e-con-full e-flex e-con e-child" data-id="73ea38e"
         data-element_type="container" data-e-type="container" id="date"
-        data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+        style="
+    background-image: url({{ $photo['url'] }})">
         <div class="elementor-element elementor-element-5d0d6a74 elementor-widget elementor-widget-spacer"
             data-id="5d0d6a74" data-element_type="widget" data-e-type="widget" data-widget_type="spacer.default">
             <div class="elementor-widget-container">

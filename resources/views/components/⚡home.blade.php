@@ -58,12 +58,18 @@ new class extends Component {
         $this->events = $settings['events'];
 
         $photos = InvitationPhoto::query()->orderBy('sort_order')->orderBy('id')->get();
-        $this->galleryPhotos = $photos->where('slot', 'gallery')->map(fn (InvitationPhoto $photo): array => [
-            'url' => $photo->url,
-            'caption' => $photo->caption ?? '',
-            'width' => $photo->width ?? 1024,
-            'height' => $photo->height ?? 1535,
-        ])->values()->all();
+        $this->galleryPhotos = $photos
+            ->where('slot', 'gallery')
+            ->map(
+                fn(InvitationPhoto $photo): array => [
+                    'url' => $photo->url,
+                    'caption' => $photo->caption ?? '',
+                    'width' => $photo->width ?? 1024,
+                    'height' => $photo->height ?? 1535
+                ]
+            )
+            ->values()
+            ->all();
         $this->bridePhoto = $this->photoData($photos->firstWhere('slot', 'bride'));
         $this->groomPhoto = $this->photoData($photos->firstWhere('slot', 'groom'));
         $this->storyPhoto = $this->photoData($photos->firstWhere('slot', 'story'));
@@ -73,7 +79,7 @@ new class extends Component {
 
     private function photoData(?InvitationPhoto $photo): ?array
     {
-        if (! $photo) {
+        if (!$photo) {
             return null;
         }
 
@@ -81,7 +87,7 @@ new class extends Component {
             'url' => $photo->url,
             'caption' => $photo->caption ?? '',
             'width' => $photo->width ?? 1024,
-            'height' => $photo->height ?? 1024,
+            'height' => $photo->height ?? 1024
         ];
     }
 };
@@ -90,8 +96,8 @@ new class extends Component {
 <div>
     <div data-elementor-type="wp-page" data-elementor-id="32120" class="elementor elementor-32120"
         data-elementor-post-type="page">
-        @include('partials.invitation.cover')
-
+        {{-- @include('partials.invitation.cover') --}}
+        <livewire:section.cover :photo="$openingPhoto" />
         <div class="elementor-element elementor-element-258985b9 e-con-full e-flex e-con e-parent" data-id="258985b9"
             data-element_type="container" data-e-type="container">
             @include('partials.invitation.desktop-cover')
@@ -99,8 +105,11 @@ new class extends Component {
             <div class="elementor-element elementor-element-6626d23e e-con-full e-flex e-con e-child" data-id="6626d23e"
                 data-element_type="container" data-e-type="container">
                 <livewire:section.opening :groomName="$groomName" :brideName="$brideName" :weddingDate="$weddingDate" :photo="$openingPhoto" />
-                @include('partials.invitation.couple', ['bridePhoto' => $bridePhoto, 'groomPhoto' => $groomPhoto])
-                <livewire:section.save-the-date :weddingDate="$weddingDate" />
+                @include('partials.invitation.couple', [
+                    'bridePhoto' => $bridePhoto,
+                    'groomPhoto' => $groomPhoto
+                ])
+                <livewire:section.save-the-date :weddingDate="$weddingDate" :photo="$openingPhoto" />
                 <livewire:section.event :events="$events" :weddingDate="$weddingDate" :weddingTime="$weddingTime" :weddingLocation="$weddingLocation"
                     :weddingAddress="$weddingAddress" :weddingMapLink="$weddingMapLink" :receptionDate="$receptionDate" :receptionTime="$receptionTime" :receptionLocation="$receptionLocation"
                     :receptionAddress="$receptionAddress" :receptionMapLink="$receptionMapLink" />
