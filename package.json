@@ -3,7 +3,9 @@
     "type": "module",
     "scripts": {
         "build": "vite build",
-        "dev": "vite"
+        "dev": "vite",
+        "start": "php artisan serve --port 8000",
+        "push": "git add . && git commit -m 'update' && git push -u origin main"
     },
     "devDependencies": {
         "@tailwindcss/vite": "^4.0.0",
