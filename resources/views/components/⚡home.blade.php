@@ -27,6 +27,7 @@ new class extends Component {
     public ?array $closingPhoto = null;
     public ?array $openingPhoto = null;
     public ?array $coverPhoto = null;
+    public ?array $wallets = null;
     #[Locked]
     public Collection $rsvpComments;
 
@@ -77,6 +78,19 @@ new class extends Component {
         $this->closingPhoto = $this->photoData($photos->firstWhere('slot', 'closing'));
         $this->openingPhoto = $this->photoData($photos->firstWhere('slot', 'opening'));
         $this->coverPhoto = $this->photoData($photos->firstWhere('slot', 'cover'));
+
+        $this->wallets = [
+            [
+                'name' => 'Mandiri',
+                'account_number' => '1850010226378',
+                'account_name' => 'FAIRUZ AKBAR'
+            ],
+            [
+                'name' => 'BRI',
+                'account_number' => '153301006393502',
+                'account_name' => 'UTAMI ALIVYA'
+            ]
+        ];
     }
 
     private function photoData(?InvitationPhoto $photo): ?array
@@ -121,7 +135,7 @@ new class extends Component {
                 <div class="elementor-element elementor-element-51cdfcef e-con-full e-flex e-con e-child"
                     data-id="51cdfcef" data-element_type="container" data-e-type="container"
                     data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
-                    <livewire:section.digital-envelope :groomName="$groomName" :brideName="$brideName" />
+                    <livewire:section.digital-envelope :wallets="$wallets" />
                     <livewire:section.rsvp :guest="$guest" :rsvpComments="$rsvpComments" />
                 </div>
 

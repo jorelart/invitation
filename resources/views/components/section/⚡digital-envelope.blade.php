@@ -170,41 +170,49 @@ new class extends Component {
                             schedule(document);
                         })();
                     </script>
-                    <div class="idb-copy-rek idb-copy-rek--auto elementor-invisible is-stack is-btn-right is-hide-bankname"
-                        id="idb-copy-rek-73170a48-0"
-                        data-settings='{&quot;_animation&quot;:&quot;zoomIn&quot;,&quot;_animation_delay&quot;:20}'
-                        data-copy="12345678" data-success="Tersalin." data-fail="Gagal menyalin. Coba lagi."
-                        data-trigger-text="0" data-trigger-btn="1">
-                        <div class="idb-copy-rek__box">
-                            <div class="idb-copy-rek__info">
-                                <div class="idb-copy-rek__label is-logo-right">
-                                    <span class="idb-copy-rek__banklogo" style="margin-left:auto;"><img decoding="async"
-                                            src="assets/vendor/site/wp-content/uploads/2026/06/BCA_5770.webp"
-                                            alt="" loading="lazy"></span>
+                    @foreach ($wallets as $wallet)
+                        <div class="idb-copy-rek idb-copy-rek--auto elementor-invisible is-stack is-btn-right is-hide-bankname"
+                            id="idb-copy-rek-73170a48-0"
+                            data-settings='{&quot;_animation&quot;:&quot;zoomIn&quot;,&quot;_animation_delay&quot;:20}'
+                            data-copy="{{ $wallet['account_number'] }}" data-success="Tersalin."
+                            data-fail="Gagal menyalin. Coba lagi." data-trigger-text="0" data-trigger-btn="1">
+                            <div class="idb-copy-rek__box">
+                                <div class="idb-copy-rek__info">
+                                    <div class="idb-copy-rek__label is-logo-right">
+                                        <span class="idb-copy-rek__banklogo" style="margin-left:auto;">
+                                            {{-- <img decoding="async"
+                                                src="assets/vendor/site/wp-content/uploads/2026/06/BCA_5770.webp"
+                                                alt="" loading="lazy"> --}}
+                                            {{ $wallet['name'] }}
+                                        </span>
+                                    </div>
+
+                                    <div class="idb-copy-rek__number ">
+                                        <div class="idb-copy-rek__chipimg"><img decoding="async"
+                                                src="assets/vendor/site/wp-content/uploads/2026/06/chip-atm-1-2-1-1-1-3-1-1.png"
+                                                alt="" loading="lazy"></div>
+                                        <div class="idb-copy-rek__numtext">
+                                            <span class="no-rekening-marker" data-gift-index="0">
+                                                {{ $wallet['account_number'] }}
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="idb-copy-rek__name">{{ $wallet['account_name'] }}</div>
                                 </div>
 
-                                <div class="idb-copy-rek__number ">
-                                    <div class="idb-copy-rek__chipimg"><img decoding="async"
-                                            src="assets/vendor/site/wp-content/uploads/2026/06/chip-atm-1-2-1-1-1-3-1-1.png"
-                                            alt="" loading="lazy"></div>
-                                    <div class="idb-copy-rek__numtext"><span class="no-rekening-marker"
-                                            data-gift-index="0">12345678</span></div>
-                                </div>
-
-                                <div class="idb-copy-rek__name">{{ $groomName }}</div>
+                                <button type="button" class="idb-copy-rek__btn">
+                                    <span class="idb-copy-rek__icon idb-is-left"><i aria-hidden="true"
+                                            class="fas fa-copy"></i></span>
+                                    <span class="idb-copy-rek__btntext">Copy</span>
+                                </button>
+                                <div class="idb-copy-rek__toast" aria-live="polite" aria-atomic="true"></div>
                             </div>
-
-                            <button type="button" class="idb-copy-rek__btn">
-                                <span class="idb-copy-rek__icon idb-is-left"><i aria-hidden="true"
-                                        class="fas fa-copy"></i></span>
-                                <span class="idb-copy-rek__btntext">Copy</span>
-                            </button>
-                            <div class="idb-copy-rek__toast" aria-live="polite" aria-atomic="true"></div>
                         </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
-            <div class="elementor-element elementor-element-f13fb2 elementor-widget elementor-widget-bisdev_kirim_hadiah"
+            {{-- <div class="elementor-element elementor-element-f13fb2 elementor-widget elementor-widget-bisdev_kirim_hadiah"
                 data-id="f13fb2" data-element_type="widget" data-e-type="widget"
                 data-widget_type="bisdev_kirim_hadiah.default">
                 <div class="elementor-widget-container">
@@ -240,7 +248,7 @@ new class extends Component {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
         <div class="elementor-element elementor-element-5a966266 elementor-widget elementor-widget-spacer"
             data-id="5a966266" data-element_type="widget" data-e-type="widget" data-widget_type="spacer.default">
