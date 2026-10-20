@@ -58,6 +58,51 @@ class GuestController extends Controller
         ]);
     }
 
+    public function destroy(Guest $guest): JsonResponse
+    {
+        $guest->delete();
+
+        return response()->json([
+            'message' => 'Undangan berhasil dihapus.',
+        ]);
+    }
+
+    public function rsvps(Request $request): JsonResponse
+    {
+        $validated = $request->validate([
+            'per_page' => ['nullable', 'integer', 'min:1', 'max:100'],
+            'presence' => ['nullable', Rule::in(['hadir', 'tidak'])],
+            'q' => ['nullable', 'string', 'max:120'],
+        ]);
+
+        $query = Rsvp::query()
+            ->with('guest:id,name,phone,max_guests')
+            ->orderByDesc('id');
+
+        if (! empty($validated['presence'])) {
+            $query->where('presence', $validated['presence']);
+        }
+
+        if (! empty($validated['q'])) {
+            $term = $validated['q'];
+            $query->whereHas('guest', fn ($guestQuery) => $guestQuery->where('name', 'like', '%'.$term.'%'));
+        }
+
+        $rsvps = $query->paginate($validated['per_page'] ?? 25)
+            ->through(fn (Rsvp $rsvp): array => [
+                'id' => $rsvp->id,
+                'guest' => $rsvp->guest,
+                'presence' => $rsvp->presence,
+                'guest_count' => $rsvp->guest_count,
+                'message' => $rsvp->message,
+                'owner_reply' => $rsvp->owner_reply,
+                'created_at' => $rsvp->created_at?->toIso8601String(),
+                'updated_at' => $rsvp->updated_at?->toIso8601String(),
+            ]);
+
+        return response()->json($rsvps);
+    }
+
     public function store(Request $request): JsonResponse
     {
         

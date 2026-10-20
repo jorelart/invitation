@@ -32,6 +32,15 @@ Route::get('/invitation', function (Request $request) {
 })->middleware('throttle:30,1');
 
 Route::prefix('v1')->middleware(VerifyWhatsAppWebhookToken::class)->group(function (): void {
+    // Undangan is represented by a guest record; keep /guests for existing clients.
+    Route::get('/invitations', [GuestController::class, 'index']);
+    Route::post('/invitations', [GuestController::class, 'store']);
+    Route::delete('/invitations/{guest}', [GuestController::class, 'destroy'])
+        ->whereNumber('guest');
+    Route::get('/rsvps', [GuestController::class, 'rsvps']);
+    Route::patch('/rsvps/{guest}/reply', [GuestController::class, 'storeRsvpReply'])
+        ->whereNumber('guest');
+
     Route::get('/guests', [GuestController::class, 'index']);
     Route::post('/guests', [GuestController::class, 'store']);
     Route::get('/guests/{guest}', [GuestController::class, 'show'])
