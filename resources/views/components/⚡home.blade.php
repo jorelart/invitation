@@ -14,23 +14,19 @@ new class extends Component {
     #[Locked]
     public ?Guest $guest = null;
 
-    public $token;
+    #[Locked]
+    public ?string $token = null;
     public ?string $guuestName;
     public ?string $brideName, $brideFullName, $brideInstagram, $brideParent, $groomName, $groomFullName, $groomInstagram, $groomParent, $weddingDate, $weddingTime, $weddingLocation, $weddingMapLink, $weddingAddress, $receptionDate, $receptionTime, $receptionLocation, $receptionAddress, $receptionMapLink;
     public array $events = [];
     #[Locked]
     public Collection $rsvpComments;
 
-    protected function quryString(): array
-    {
-        return [
-            'token' => $this->token
-        ];
-    }
-
     public function mount(): void
     {
-        $this->guest = Guest::where('invitation_token', $this->token)->first();
+        $inv = request()->query('inv');
+        $this->token = is_string($inv) && preg_match('/^[A-Za-z0-9]{64}$/', $inv) ? $inv : null;
+        $this->guest = $this->token ? Guest::where('invitation_token', $this->token)->first() : null;
         $this->brideName = 'Vya';
         $this->brideFullName = 'Utami Alivya Widyawati, S.Tr.Keb.,Bd.';
         $this->brideInstagram = 'utamialivyaa_';

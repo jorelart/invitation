@@ -9,7 +9,7 @@ new class extends Component {
     // $guest passed from home components
     public function mount($guest)
     {
-        $this->rsvpComments = Rsvp::with('guest')->get();
+        $this->rsvpComments = Rsvp::with('guest')->latest()->get();
         $this->guestName = $guest->name ?? 'Tamu Undangan';
         $this->guestId = $guest->id ?? null;
         $this->presence = false;
@@ -37,14 +37,22 @@ new class extends Component {
                 'message.max' => 'Pesan maksimal 500 karakter.'
             ]
         );
+        $this->validate([
+            'presence' => 'required|in:hadir,tidak',
+            'guestCount' => 'required|integer|min:1|max:20'
+        ]);
 
         // Save the RSVP data to the database
         Rsvp::create([
             'guest_id' => $this->guestId,
             'message' => $this->message,
             'presence' => $this->presence,
-            'guest_count' => $this->guestCount
+            'guest_count' => $this->presence === 'hadir' ? $this->guestCount : 0
         ]);
+
+        // Livewire keeps public properties between requests, so refresh this
+        // collection after inserting the new RSVP before the component rerenders.
+        $this->rsvpComments = Rsvp::with('guest')->latest()->get();
 
         // Reset the form fields
         $this->reset(['message', 'presence', 'guestCount']);
@@ -147,7 +155,7 @@ new class extends Component {
                         {{-- {{ var_export($presence) }} --}}
                         <div class="rsvp-pills" data-rsvp="presence">
                             <label for='hadir' type="button"
-                                class="rsvp-pill rsvp-pill--hadir {{ $presence ? 'active' : null }}"
+                                class="rsvp-pill rsvp-pill--hadir {{ $presence === 'hadir' ? 'active' : null }}"
                                 data-rsvp-pill="hadir" data-active="0">
                                 <span class="pill-icon">
                                     <img loading="lazy"
@@ -159,7 +167,7 @@ new class extends Component {
                             </label>
 
                             <label for="tidak" type="button"
-                                class="rsvp-pill rsvp-pill--tidak {{ $presence ? null : 'active' }}"
+                                class="rsvp-pill rsvp-pill--tidak {{ $presence === 'tidak' ? 'active' : null }}"
                                 data-rsvp-pill="tidak" data-active="0">
                                 <span class="pill-icon">
                                     <img loading="lazy"
@@ -170,13 +178,13 @@ new class extends Component {
                                 <span>Tidak Hadir</span>
                             </label>
                         </div>
-                        <input wire:model.live='presence' type="radio" id="hadir" value="1"
+                        <input wire:model.live='presence' type="radio" id="hadir" value="hadir"
                             style="display: none" />
-                        <input wire:model.live='presence' type="radio" id="tidak" value="0"
+                        <input wire:model.live='presence' type="radio" id="tidak" value="tidak"
                             style="display: none" />
                     </div>
 
-                    @if ($presence)
+                    @if ($presence === 'hadir')
                         <div class="rsvp-field rsvp-jumlah-tamu-wrap">
                             <label class="rsvp-jumlah-tamu">
                                 <span class="rsvp-jumlah-tamu-label">Jumlah Tamu</span>
@@ -238,7 +246,7 @@ new class extends Component {
                                         @if ($rsvpComment->owner_reply)
                                             <ul class="rsvp-replies">
                                                 <li class="rsvp-reply-item">
-                                                    <div class="rsvp-reply-author">Rapita &amp; Lingga</div>
+                                                    <div class="rsvp-reply-author">Fairuz &amp; Vya</div>
                                                     <div class="rsvp-reply-meta">
                                                         {{ $rsvpComment->updated_at?->format('d-m-Y H:i') }}</div>
                                                     <div class="rsvp-reply-msg">{{ $rsvpComment->owner_reply }}</div>

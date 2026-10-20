@@ -14,7 +14,7 @@ class Home extends Controller
     {
         $this->data = [
             'title' => 'Undangan Website Premium 06',
-            'guest' => Guest::where('invitation_token', request()->query('token'))->first(),
+            'guest' => Guest::where('invitation_token', request()->query('inv'))->first(),
             'rsvpComments' => Rsvp::with('guest')->get()
         ];
     }

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/invitation', function (Request $request) {
-    $token = $request->bearerToken();
+    $token = $request->query('inv') ?: $request->bearerToken();
 
     if (! $token || strlen($token) > 128) {
         return response()->json([

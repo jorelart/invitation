@@ -7,6 +7,22 @@
 
             <title>{{ $title ?? config('app.name') }}</title>
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <script>
+                (() => {
+                    const url = new URL(window.location.href);
+                    const hashParams = new URLSearchParams(url.hash.slice(1));
+                    const hashInv = hashParams.get('inv') || hashParams.get('token');
+                    const queryInv = url.searchParams.get('inv');
+                    const legacyQueryToken = url.searchParams.get('token');
+
+                    if (!queryInv && (hashInv || legacyQueryToken)) {
+                        url.searchParams.set('inv', hashInv || legacyQueryToken);
+                        url.searchParams.delete('token');
+                        if (hashInv) url.hash = '';
+                        window.location.replace(url.toString());
+                    }
+                })();
+            </script>
             <meta name="description" content="Buat undangan website untuk pernikahanmu secara mudah, murah dan cepat. Jadikan acara kamu jadi lebih berkesan !" />
             <meta property="og:locale" content="id_ID" />
             <meta property="og:type" content="article" />

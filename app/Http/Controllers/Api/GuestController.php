@@ -129,7 +129,7 @@ class GuestController extends Controller
             'message' => 'Tamu berhasil dibuat.',
             'data' => $this->guestData($guest),
             'invitation_token' => $guest->invitation_token,
-            'invitation_url' => rtrim(config('app.url'), '/').'/#token='.$guest->invitation_token,
+            'invitation_url' => rtrim(config('app.url'), '/').'/?inv='.rawurlencode($guest->invitation_token),
         ], 201);
     }
 
