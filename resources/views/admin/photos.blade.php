@@ -25,7 +25,7 @@
             </select></div>
             <div><label for="caption">Keterangan / teks alternatif</label><input id="caption" name="caption" value="{{ old('caption') }}" maxlength="255"></div>
             <div><label for="sort_order">Urutan (galeri)</label><input id="sort_order" name="sort_order" type="number" min="0" max="999" value="{{ old('sort_order', 10) }}" required></div>
-            <div><label for="image">Pilih foto</label><input id="image" name="image" type="file" accept="image/jpeg,image/png,image/webp" required><div class="muted" style="margin-top:6px">JPG, PNG, atau WebP; maksimal 8 MB.</div></div>
+            <div><label for="image">Pilih foto</label><input id="image" name="image" type="file" accept="image/jpeg,image/png,image/webp" required><div class="muted" style="margin-top:6px">JPG, PNG, atau WebP; maksimal 20 MB.</div></div>
             <button type="submit">Unggah foto</button>
         </form>
     </section>

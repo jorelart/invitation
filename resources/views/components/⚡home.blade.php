@@ -28,8 +28,20 @@ new class extends Component {
     public ?array $openingPhoto = null;
     public ?array $coverPhoto = null;
     public ?array $wallets = null;
+
+    public $cover;
+    public ?string $description;
     #[Locked]
     public Collection $rsvpComments;
+
+    public function render()
+    {
+        return view('components.⚡home')->layout('layouts.app', [
+            'title' => $this->title,
+            'description' => $this->description,
+            'cover' => $this->cover,
+        ]);
+    }
 
     public function mount(): void
     {
@@ -78,6 +90,10 @@ new class extends Component {
         $this->closingPhoto = $this->photoData($photos->firstWhere('slot', 'closing'));
         $this->openingPhoto = $this->photoData($photos->firstWhere('slot', 'opening'));
         $this->coverPhoto = $this->photoData($photos->firstWhere('slot', 'cover'));
+
+        // seo
+        $this->description = 'Undangan Pernikahan Fairuz & Vya';
+        $this->cover = $this->photoData($photos->firstWhere('slot', 'cover'));
 
         $this->wallets = [
             [

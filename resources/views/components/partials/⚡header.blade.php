@@ -14,18 +14,16 @@ new class extends Component {
         <meta charset="UTF-8">
         <meta name='robots' content='noindex, nofollow' />
 
-        <title>Undangan Website Premium 06</title>
-        <meta name="description"
-            content="Buat undangan website untuk pernikahanmu secara mudah, murah dan cepat. Jadikan acara kamu jadi lebih berkesan !" />
+        <title>{{ $title }}</title>
+        <meta name="description" content="" />
         <meta property="og:locale" content="id_ID" />
         <meta property="og:type" content="article" />
-        <meta property="og:title" content="Undangan Website Premium 06" />
-        <meta property="og:description"
-            content="Buat undangan website untuk pernikahanmu secara mudah, murah dan cepat. Jadikan acara kamu jadi lebih berkesan !" />
+        <meta property="og:title" content="{{ $title }}" />
+        <meta property="og:description" content="{{ $title }}" />
         <meta property="og:url" content="./" />
-        <meta property="og:site_name" content="Undangan Digital" />
-        <meta property="article:modified_time" content="2026-09-14T01:26:05+00:00" />
-        <meta property="og:image" content="assets/vendor/site/wp-content/uploads/2025/11/PREMIUM-VINTAGE-06-2.webp" />
+        <meta property="og:site_name" content="{{ $title }}" />
+        {{-- <meta property="article:modified_time" content="2026-09-14T01:26:05+00:00" /> --}}
+        <meta property="og:image" content="{{ $photo['url'] }}" />
         <meta property="og:image:width" content="1076" />
         <meta property="og:image:height" content="1080" />
         <meta property="og:image:type" content="image/webp" />
@@ -841,7 +839,7 @@ new class extends Component {
             document.addEventListener("DOMContentLoaded", function() {
                 document.querySelectorAll(
                     ".elementor-widget-bisdev_konfirmasi_transfer,.elementor-element[data-widget_type=\"bisdev_konfirmasi_transfer.default\"],.idb-konfirmasi-transfer"
-                    ).forEach(function(el) {
+                ).forEach(function(el) {
                     try {
                         el.remove();
                     } catch (e) {

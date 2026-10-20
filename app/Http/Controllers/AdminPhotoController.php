@@ -25,7 +25,7 @@ class AdminPhotoController extends Controller
             'slot' => ['required', Rule::in(['gallery', 'bride', 'groom', 'story', 'closing', 'opening', 'cover'])],
             'caption' => ['nullable', 'string', 'max:255'],
             'sort_order' => ['required', 'integer', 'min:0', 'max:999'],
-            'image' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:8192'],
+            'image' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:20480'],
         ]);
 
         $photoData = $this->uploadedPhotoData($validated['image']);
@@ -51,7 +51,7 @@ class AdminPhotoController extends Controller
             'slot' => ['required', Rule::in(['gallery', 'bride', 'groom', 'story', 'closing', 'opening', 'cover'])],
             'caption' => ['nullable', 'string', 'max:255'],
             'sort_order' => ['required', 'integer', 'min:0', 'max:999'],
-            'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:8192'],
+            'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:20480'],
         ]);
 
         $oldPath = $photo->path;
