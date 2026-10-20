@@ -14,7 +14,7 @@ new class extends Component {
     data-element_type="container" data-e-type="container" id="sec">
     <div class="elementor-element elementor-element-565c4d14 e-con-full e-flex e-con e-child" data-id="565c4d14"
         data-element_type="container" data-e-type="container" id="kolom"
-        style="background-image: url({{ $photo['url'] }})">
+        style="background-image: url({{ $photo['url'] ?? null }})">
         <div class="idb-reveal idb-ef zoom-down elementor-element elementor-element-296ddb88 elementor-widget__width-inherit elementor-widget elementor-widget-heading"
             data-reveal-offset="100" data-reveal-duration="2000" data-reveal-delay="200"
             style="transition-duration: 2000ms; transition-delay: 200ms;" data-id="296ddb88" data-element_type="widget"
