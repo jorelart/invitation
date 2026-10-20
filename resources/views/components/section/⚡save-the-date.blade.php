@@ -23,7 +23,7 @@ new class extends Component {
     <div class="elementor-element elementor-element-73ea38e e-con-full e-flex e-con e-child" data-id="73ea38e"
         data-element_type="container" data-e-type="container" id="date"
         style="
-    background-image: url({{ $photo['url'] }})">
+    background-image: url({{ $photo['url'] ?? null }})">
         <div class="elementor-element elementor-element-5d0d6a74 elementor-widget elementor-widget-spacer"
             data-id="5d0d6a74" data-element_type="widget" data-e-type="widget" data-widget_type="spacer.default">
             <div class="elementor-widget-container">
