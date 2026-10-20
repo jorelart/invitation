@@ -15,7 +15,7 @@ class AdminController extends Controller
 {
     public function editSettings(): View
     {
-        $settings = InvitationSetting::query()->where('key', 'home')->firstOrFail()->value;
+        $settings = array_merge(config('invitation'), InvitationSetting::query()->where('key', 'home')->firstOrFail()->value);
 
         return view('admin.settings', compact('settings'));
     }
@@ -34,21 +34,28 @@ class AdminController extends Controller
             'groomParent' => ['required', 'string', 'max:500'],
             'weddingDate' => ['required', 'date'],
             'weddingTime' => ['required', 'regex:/^\d{1,2}:\d{2}(?:\s*WIB)?$/i'],
-            'weddingLocation' => ['required', 'string', 'max:180'],
+            'weddingLocation' => ['nullable', 'string', 'max:180'],
             'weddingAddress' => ['required', 'string', 'max:1000'],
             'weddingMapLink' => ['required', 'url', 'max:1000'],
             'receptionDate' => ['required', 'date'],
             'receptionTime' => ['required', 'regex:/^\d{1,2}:\d{2}(?:\s*WIB)?$/i'],
-            'receptionLocation' => ['required', 'string', 'max:180'],
+            'receptionLocation' => ['nullable', 'string', 'max:180'],
             'receptionAddress' => ['required', 'string', 'max:1000'],
             'receptionMapLink' => ['required', 'url', 'max:1000'],
             'events' => ['required', 'array', 'min:1', 'max:10'],
             'events.*.name' => ['required', 'string', 'max:160'],
             'events.*.date' => ['required', 'date'],
             'events.*.time' => ['required', 'string', 'max:120'],
-            'events.*.location' => ['required', 'string', 'max:180'],
+            'events.*.location' => ['nullable', 'string', 'max:180'],
             'events.*.address' => ['required', 'string', 'max:1000'],
             'events.*.map_link' => ['nullable', 'url', 'max:1000'],
+            'lovestories' => ['required', 'array', 'min:1', 'max:10'],
+            'lovestories.*.title' => ['required', 'string', 'max:160'],
+            'lovestories.*.text' => ['required', 'string', 'max:3000'],
+            'wallets' => ['required', 'array', 'min:1', 'max:10'],
+            'wallets.*.name' => ['required', 'string', 'max:120'],
+            'wallets.*.account_number' => ['required', 'string', 'max:80'],
+            'wallets.*.account_name' => ['required', 'string', 'max:160'],
         ]);
 
         InvitationSetting::updateOrCreate(['key' => 'home'], ['value' => $validated]);

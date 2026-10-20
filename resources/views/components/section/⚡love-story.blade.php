@@ -4,10 +4,12 @@ use Livewire\Component;
 
 new class extends Component {
     public ?array $photo = null;
+    public array $lovestories = [];
 
-    public function mount(?array $photo = null): void
+    public function mount(?array $photo = null, array $lovestories = []): void
     {
         $this->photo = $photo;
+        $this->lovestories = $lovestories;
     }
 };
 ?>
@@ -50,7 +52,8 @@ new class extends Component {
             <div class="elementor-widget-container">
                 @if ($photo)
                     <img loading="lazy" decoding="async" width="{{ $photo['width'] }}" height="{{ $photo['height'] }}"
-                        src="{{ $photo['url'] }}" class="attachment-full size-full wp-image-34100" alt="{{ $photo['caption'] }}" />
+                        src="{{ $photo['url'] }}" class="attachment-full size-full wp-image-34100"
+                        alt="{{ $photo['caption'] }}" />
                 @endif
             </div>
         </div>
@@ -72,46 +75,22 @@ new class extends Component {
                     data-reveal-offset="100" data-reveal-delay="180" data-reveal-duration="2500"
                     style="--idb-tl-reveal-delay: 180ms; --idb-tl-reveal-duration: 2500ms;">
                     <div class="idb-timeline__list">
-                        <div class="idb-timeline__item">
-                            <div class="idb-timeline__content idb-reveal idb-ef zoom-up" data-reveal-offset="100"
-                                data-reveal-duration="2500" data-reveal-delay="0" style="transition-duration: 2500ms;">
-                                <h3 class="idb-timeline__title">Awal Cerita</h3>
-                                <div class="idb-timeline__desc">
-                                    <span class="niku-multiline">
-                                        Berawal dari pertemuan
-                                        sederhana, kami saling mengenal dan mulai berbagi banyak cerita. Tanpa disadari,
-                                        kebersamaan itu tumbuh menjadi rasa nyaman yang semakin kuat dari hari ke
-                                        hari.
-                                    </span>
+
+                        @foreach ($lovestories as $story)
+                            <div class="idb-timeline__item">
+                                <div class="idb-timeline__content idb-reveal idb-ef zoom-up" data-reveal-offset="100"
+                                    data-reveal-duration="2500" data-reveal-delay="0"
+                                    style="transition-duration: 2500ms;">
+                                    <h3 class="idb-timeline__title">{{ $story['title'] }}</h3>
+                                    <div class="idb-timeline__desc">
+                                        <span class="niku-multiline">
+                                            {{ $story['text'] }}
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="idb-timeline__item">
-                            <div class="idb-timeline__content idb-reveal idb-ef zoom-up" data-reveal-offset="100"
-                                data-reveal-duration="2500" data-reveal-delay="180"
-                                style="transition-duration: 2500ms; transition-delay: 180ms;">
-                                <h3 class="idb-timeline__title">Lamaran</h3>
-                                <div class="idb-timeline__desc">
-                                    <span class="niku-multiline">Dengan niat yang tulus dan
-                                        restu keluarga, kami memutuskan untuk melangkah ke tahap yang lebih serius.
-                                        Momen lamaran menjadi awal dari perjalanan baru yang penuh harapan dan doa
-                                        baik.</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="idb-timeline__item">
-                            <div class="idb-timeline__content idb-reveal idb-ef zoom-up" data-reveal-offset="100"
-                                data-reveal-duration="2500" data-reveal-delay="360"
-                                style="transition-duration: 2500ms; transition-delay: 360ms;">
-                                <h3 class="idb-timeline__title">Pernikahan</h3>
-                                <div class="idb-timeline__desc"><span class="niku-multiline">Kini kami sampai pada
-                                        hari
-                                        yang kami nantikan, hari di mana dua hati dipersatukan dalam ikatan suci
-                                        pernikahan. Semoga langkah ini menjadi awal kehidupan baru yang penuh cinta,
-                                        kebahagiaan, dan keberkahan.</span>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
+
                     </div>
                 </div>
             </div>

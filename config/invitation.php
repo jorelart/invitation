@@ -46,4 +46,13 @@ return [
             'map_link' => 'https://maps.google.com/?q=Rumah+Makan',
         ],
     ],
+    'lovestories' => [
+        ['title' => 'Awal Cerita', 'text' => "Berawal dari pertemuan sederhana, kami saling mengenal dan mulai berbagi banyak cerita. Tanpa disadari, kebersamaan itu tumbuh menjadi rasa nyaman yang semakin kuat dari hari ke hari."],
+        ['title' => 'Lamaran', 'text' => 'Dengan niat yang tulus dan restu keluarga, kami memutuskan untuk melangkah ke tahap yang lebih serius. Momen lamaran menjadi awal dari perjalanan baru yang penuh harapan dan doa baik.'],
+        ['title' => 'Pernikahan', 'text' => 'Kini kami sampai pada hari yang kami nantikan, hari di mana dua hati dipersatukan dalam ikatan suci pernikahan. Semoga langkah ini menjadi awal kehidupan baru yang penuh cinta, kebahagiaan, dan keberkahan.'],
+    ],
+    'wallets' => [
+        ['name' => 'Mandiri', 'account_number' => '1850010226378', 'account_name' => 'FAIRUZ AKBAR'],
+        ['name' => 'BRI', 'account_number' => '153301006393502', 'account_name' => 'UTAMI ALIVYA'],
+    ],
 ];

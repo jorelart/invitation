@@ -28,6 +28,7 @@ new class extends Component {
     public ?array $openingPhoto = null;
     public ?array $coverPhoto = null;
     public ?array $wallets = null;
+    public ?array $lovestories = null;
 
     public $cover;
     public ?string $description;
@@ -39,7 +40,7 @@ new class extends Component {
         return view('components.⚡home')->layout('layouts.app', [
             'title' => $this->title,
             'description' => $this->description,
-            'cover' => $this->cover,
+            'cover' => $this->cover
         ]);
     }
 
@@ -95,7 +96,32 @@ new class extends Component {
         $this->description = 'Undangan Pernikahan Fairuz & Vya';
         $this->cover = $this->photoData($photos->firstWhere('slot', 'cover'));
 
-        $this->wallets = [
+        $this->lovestories = $settings['lovestories'] ?? [
+            [
+                'title' => 'Awal Cerita',
+                'text' => "Berawal dari pertemuan
+                                        sederhana, kami saling mengenal dan mulai berbagi banyak cerita. Tanpa disadari,
+                                        kebersamaan itu tumbuh menjadi rasa nyaman yang semakin kuat dari hari ke
+                                        hari."
+            ],
+            [
+                'title' => 'Lamaran',
+                'text' => "Dengan niat yang tulus dan
+                                        restu keluarga, kami memutuskan untuk melangkah ke tahap yang lebih serius.
+                                        Momen lamaran menjadi awal dari perjalanan baru yang penuh harapan dan doa
+                                        baik."
+            ],
+            [
+                'title' => 'Pernikahan',
+                'text' => "Kini kami sampai pada
+                                        hari
+                                        yang kami nantikan, hari di mana dua hati dipersatukan dalam ikatan suci
+                                        pernikahan. Semoga langkah ini menjadi awal kehidupan baru yang penuh cinta,
+                                        kebahagiaan, dan keberkahan."
+            ]
+        ];
+
+        $this->wallets = $settings['wallets'] ?? [
             [
                 'name' => 'Mandiri',
                 'account_number' => '1850010226378',
@@ -145,7 +171,7 @@ new class extends Component {
                 <livewire:section.event :events="$events" :weddingDate="$weddingDate" :weddingTime="$weddingTime" :weddingLocation="$weddingLocation"
                     :weddingAddress="$weddingAddress" :weddingMapLink="$weddingMapLink" :receptionDate="$receptionDate" :receptionTime="$receptionTime" :receptionLocation="$receptionLocation"
                     :receptionAddress="$receptionAddress" :receptionMapLink="$receptionMapLink" />
-                <livewire:section.love-story :photo="$storyPhoto" />
+                <livewire:section.love-story :photo="$storyPhoto" :lovestories="$lovestories" />
                 <livewire:section.gallery :photos="$galleryPhotos" />
 
                 <div class="elementor-element elementor-element-51cdfcef e-con-full e-flex e-con e-child"
