@@ -30,7 +30,7 @@ new class extends Component {
     public ?array $wallets = null;
     public ?array $lovestories = null;
 
-    public $cover;
+    // public $cover;
     public ?string $description;
     #[Locked]
     public Collection $rsvpComments;
@@ -40,7 +40,7 @@ new class extends Component {
         return view('components.⚡home')->layout('layouts.app', [
             'title' => $this->title,
             'description' => $this->description,
-            'cover' => $this->cover
+            'cover' => $this->coverPhoto
         ]);
     }
 
@@ -94,7 +94,7 @@ new class extends Component {
 
         // seo
         $this->description = 'Undangan Pernikahan Fairuz & Vya';
-        $this->cover = $this->photoData($photos->firstWhere('slot', 'cover'));
+        // $this->cover = $this->photoData($photos->firstWhere('slot', 'cover'));
 
         $this->lovestories = $settings['lovestories'] ?? [
             [
