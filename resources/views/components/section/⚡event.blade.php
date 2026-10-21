@@ -78,8 +78,9 @@ new class extends Component {
                     data-id="649c29e2" data-element_type="widget" data-e-type="widget"
                     data-widget_type="text-editor.default">
                     <div class="elementor-widget-container">
-                        Tempat : <br> <span class="niku-multiline"><strong>{{ $event['location'] }}</strong><br
-                                class="niku-lb">{{ $event['address'] }}</span> </div>
+                        Tempat : <br> <span class="niku-multiline">
+                            {{-- <strong>{{ $event['location'] }}</strong> --}}
+                            {{ $event['address'] }}</span> </div>
                 </div>
                 <div class="idb-reveal idb-ef zoom-down elementor-element elementor-element-6a0a05e3 elementor-widget elementor-widget-bisdev_social_icons"
                     data-reveal-offset="100" data-reveal-duration="2000" data-reveal-delay="0"
