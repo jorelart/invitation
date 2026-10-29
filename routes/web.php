@@ -18,6 +18,9 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function (): v
     Route::get('/', [AdminController::class, 'index'])->name('index');
     Route::get('/settings', [AdminController::class, 'editSettings'])->name('settings.edit');
     Route::put('/settings', [AdminController::class, 'updateSettings'])->name('settings.update');
+    Route::get('/whatsapp-message', [AdminController::class, 'editWhatsAppMessage'])->name('whatsapp-message.edit');
+    Route::put('/whatsapp-message', [AdminController::class, 'updateWhatsAppMessage'])->name('whatsapp-message.update');
+    Route::delete('/whatsapp-message', [AdminController::class, 'resetWhatsAppMessage'])->name('whatsapp-message.reset');
     Route::get('/photos', [AdminPhotoController::class, 'index'])->name('photos.index');
     Route::post('/photos', [AdminPhotoController::class, 'store'])->name('photos.store');
     Route::patch('/photos/{photo}', [AdminPhotoController::class, 'update'])->whereNumber('photo')->name('photos.update');

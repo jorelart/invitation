@@ -26,6 +26,7 @@ new class extends Component {
     public ?array $storyPhoto = null;
     public ?array $closingPhoto = null;
     public ?array $openingPhoto = null;
+    public ?array $saveTheDatePhoto = null;
     public ?array $coverPhoto = null;
     public ?array $wallets = null;
     public ?array $lovestories = null;
@@ -90,6 +91,7 @@ new class extends Component {
         $this->storyPhoto = $this->photoData($photos->firstWhere('slot', 'story'));
         $this->closingPhoto = $this->photoData($photos->firstWhere('slot', 'closing'));
         $this->openingPhoto = $this->photoData($photos->firstWhere('slot', 'opening'));
+        $this->saveTheDatePhoto = $this->photoData($photos->firstWhere('slot', 'save_the_date'));
         $this->coverPhoto = $this->photoData($photos->firstWhere('slot', 'cover'));
 
         // seo
@@ -167,7 +169,7 @@ new class extends Component {
                     'bridePhoto' => $bridePhoto,
                     'groomPhoto' => $groomPhoto
                 ])
-                <livewire:section.save-the-date :weddingDate="$weddingDate" :photo="$openingPhoto" />
+                <livewire:section.save-the-date :weddingDate="$weddingDate" :photo="$saveTheDatePhoto" />
                 <livewire:section.event :events="$events" :weddingDate="$weddingDate" :weddingTime="$weddingTime" :weddingLocation="$weddingLocation"
                     :weddingAddress="$weddingAddress" :weddingMapLink="$weddingMapLink" :receptionDate="$receptionDate" :receptionTime="$receptionTime" :receptionLocation="$receptionLocation"
                     :receptionAddress="$receptionAddress" :receptionMapLink="$receptionMapLink" />

@@ -63,6 +63,35 @@ class AdminController extends Controller
         return redirect()->route('admin.settings.edit')->with('success', 'Pengaturan undangan berhasil disimpan.');
     }
 
+    public function editWhatsAppMessage(): View
+    {
+        $stored = InvitationSetting::query()->where('key', 'whatsapp_message')->first()?->value;
+        $message = is_array($stored) ? ($stored['message'] ?? config('invitation.whatsapp_message')) : config('invitation.whatsapp_message');
+
+        return view('admin.whatsapp-message', compact('message'));
+    }
+
+    public function updateWhatsAppMessage(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'message' => ['required', 'string', 'max:10000'],
+        ]);
+
+        InvitationSetting::updateOrCreate(
+            ['key' => 'whatsapp_message'],
+            ['value' => ['message' => $validated['message']]],
+        );
+
+        return redirect()->route('admin.whatsapp-message.edit')->with('success', 'Template pesan WhatsApp berhasil disimpan.');
+    }
+
+    public function resetWhatsAppMessage(): RedirectResponse
+    {
+        InvitationSetting::query()->where('key', 'whatsapp_message')->delete();
+
+        return redirect()->route('admin.whatsapp-message.edit')->with('success', 'Template pesan WhatsApp dikembalikan ke pesan bawaan.');
+    }
+
     public function index(Request $request): View
     {
         $validated = $request->validate([
@@ -91,7 +120,11 @@ class AdminController extends Controller
             $rsvpQuery->where('presence', $validated['presence']);
         }
 
+        $storedWhatsAppMessage = InvitationSetting::query()->where('key', 'whatsapp_message')->first()?->value;
+
         return view('admin.index', [
+            'invitationSettings' => array_merge(config('invitation'), InvitationSetting::query()->where('key', 'home')->firstOrFail()->value),
+            'whatsappMessage' => is_array($storedWhatsAppMessage) ? ($storedWhatsAppMessage['message'] ?? config('invitation.whatsapp_message')) : config('invitation.whatsapp_message'),
             'guests' => $guestQuery->paginate(15, ['*'], 'guests_page')->withQueryString(),
             'rsvps' => $rsvpQuery->paginate(15, ['*'], 'rsvps_page')->withQueryString(),
             'guestCount' => Guest::count(),

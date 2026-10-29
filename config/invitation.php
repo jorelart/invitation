@@ -1,6 +1,27 @@
 <?php
 
 return [
+    'whatsapp_message' => <<<'MESSAGE'
+Assalamu'alaikum Wr. Wb
+Bismillahirrahmanirrahim.
+
+Yth. {{ nama_tamu }},
+
+Tanpa mengurangi rasa hormat, perkenankan kami mengundang Bapak/Ibu/Saudara/i, teman sekaligus sahabat, untuk menghadiri acara pernikahan kami:
+
+{{ nama_pria & nama_wanita }}
+
+Berikut link undangan kami untuk info lengkap dari acara bisa kunjungi:
+
+{{ link_undangan }}
+
+Merupakan suatu kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan untuk hadir dan memberikan doa restu.
+
+Mohon maaf perihal undangan hanya dibagikan melalui pesan ini. Terima kasih banyak atas perhatiannya.
+
+Wassalamu'alaikum Wr. Wb.
+Terima Kasih.
+MESSAGE,
     'title' => 'Undangan Website Premium 06',
     'brideName' => 'Vya',
     'brideFullName' => 'Utami Alivya Widyawati, S.Tr.Keb.,Bd.',

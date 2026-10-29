@@ -10,6 +10,7 @@
         <div style="display:flex;gap:8px;flex-wrap:wrap">
             <a class="button secondary" href="{{ route('admin.settings.edit') }}">Ubah konten undangan</a>
             <a class="button secondary" href="{{ route('admin.photos.index') }}">Kelola foto</a>
+            <a class="button secondary" href="{{ route('admin.whatsapp-message.edit') }}">Pesan WhatsApp</a>
         </div>
     </div>
 
@@ -71,7 +72,18 @@
                             <td data-label="Link undangan"><a class="url" href="{{ url('/?inv='.$guest->invitation_token) }}" target="_blank" rel="noopener">{{ url('/?inv='.$guest->invitation_token) }}</a></td>
                             <td data-label="Aksi">
                                 <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-                                    <button class="secondary copy-link" type="button" data-copy-link="{{ url('/?inv='.$guest->invitation_token) }}">Salin link</button>
+                                    @php
+                                        $invitationUrl = url('/?inv='.$guest->invitation_token);
+                                        $waPhone = preg_replace('/\D+/', '', (string) $guest->phone);
+                                        $waPhone = str_starts_with($waPhone, '0') ? '62'.substr($waPhone, 1) : $waPhone;
+                                        $waMessage = strtr($whatsappMessage, [
+                                            '{{ nama_tamu }}' => $guest->name,
+                                            '{{ nama_pria & nama_wanita }}' => $invitationSettings['groomName'].' & '.$invitationSettings['brideName'],
+                                            '{{ link_undangan }}' => $invitationUrl,
+                                        ]);
+                                    @endphp
+                                    <a class="button" href="https://wa.me/{{ $waPhone }}?text={{ rawurlencode($waMessage) }}" target="_blank" rel="noopener">Send</a>
+                                    <button class="secondary copy-link" type="button" data-copy-link="{{ $invitationUrl }}">Salin link</button>
                                     <form method="post" action="{{ route('admin.invitations.destroy', $guest) }}" onsubmit="return confirm('Hapus undangan {{ $guest->name }}? RSVP terkait juga akan terhapus.')">
                                         @csrf @method('delete')
                                         <button class="danger" type="submit">Hapus</button>
