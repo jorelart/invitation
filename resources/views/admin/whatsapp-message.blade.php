@@ -13,9 +13,9 @@
     <section class="card section">
         <p>Template ini dipakai tombol <strong>Send</strong> pada setiap undangan. Placeholder yang tersedia:</p>
         <ul>
-            <li><code>{{ '{{ nama_tamu }}' }}</code> untuk nama tamu</li>
-            <li><code>{{ '{{ nama_pria & nama_wanita }}' }}</code> untuk nama pasangan</li>
-            <li><code>{{ '{{ link_undangan }}' }}</code> untuk link undangan tamu</li>
+            <li><code>&#123;&#123; nama_tamu &#125;&#125;</code> untuk nama tamu</li>
+            <li><code>&#123;&#123; nama_pria &amp; nama_wanita &#125;&#125;</code> untuk nama pasangan</li>
+            <li><code>&#123;&#123; link_undangan &#125;&#125;</code> untuk link undangan tamu</li>
         </ul>
         <form method="post" action="{{ route('admin.whatsapp-message.update') }}">
             @csrf @method('put')
