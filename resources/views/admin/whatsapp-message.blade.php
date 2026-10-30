@@ -1,9 +1,9 @@
-@extends('layouts.admin', ['title' => 'Pesan WhatsApp'])
+@extends('layouts.admin', ['title' => 'Template Pesan Undangan'])
 
 @section('content')
 <main class="container">
     <div class="section-head">
-        <div><p class="muted" style="margin:0 0 6px">PANEL PENGELOLAAN</p><h1>Template pesan WhatsApp</h1></div>
+        <div><p class="muted" style="margin:0 0 6px">PANEL PENGELOLAAN</p><h1>Template pesan undangan</h1></div>
         <a class="button secondary" href="{{ route('admin.index') }}">Kembali ke admin</a>
     </div>
 
@@ -11,7 +11,7 @@
     @if ($errors->any())<div class="notice error" role="alert">{{ $errors->first() }}</div>@endif
 
     <section class="card section">
-        <p>Template ini dipakai tombol <strong>Send</strong> pada setiap undangan. Placeholder yang tersedia:</p>
+        <p>Template ini dipakai untuk WhatsApp dan Instagram. WhatsApp dapat dibuka dengan pesan terisi; untuk Instagram, salin pesan lalu tempelkan ke Direct Message. Placeholder yang tersedia:</p>
         <ul>
             <li><code>&#123;&#123; nama_tamu &#125;&#125;</code> untuk nama tamu</li>
             <li><code>&#123;&#123; nama_pria &amp; nama_wanita &#125;&#125;</code> untuk nama pasangan</li>
@@ -19,9 +19,9 @@
         </ul>
         <form method="post" action="{{ route('admin.whatsapp-message.update') }}">
             @csrf @method('put')
-            <label for="message">Isi pesan</label>
+            <label for="message">Isi pesan undangan</label>
             <textarea id="message" name="message" rows="20" maxlength="10000" required>{{ old('message', $message) }}</textarea>
-            <button type="submit" style="margin-top:14px">Simpan pesan</button>
+            <button type="submit" style="margin-top:14px">Simpan template</button>
         </form>
         <form method="post" action="{{ route('admin.whatsapp-message.reset') }}" style="margin-top:10px" onsubmit="return confirm('Kembalikan template ke pesan bawaan?')">
             @csrf @method('delete')

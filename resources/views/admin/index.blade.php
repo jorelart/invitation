@@ -10,7 +10,7 @@
         <div style="display:flex;gap:8px;flex-wrap:wrap">
             <a class="button secondary" href="{{ route('admin.settings.edit') }}">Ubah konten undangan</a>
             <a class="button secondary" href="{{ route('admin.photos.index') }}">Kelola foto</a>
-            <a class="button secondary" href="{{ route('admin.whatsapp-message.edit') }}">Pesan WhatsApp</a>
+            <a class="button secondary" href="{{ route('admin.whatsapp-message.edit') }}">Custom Pesan</a>
         </div>
     </div>
 
@@ -82,11 +82,13 @@
                                             '{{ link_undangan }}' => $invitationUrl,
                                         ]);
                                     @endphp
-                                    <a class="button" href="https://wa.me/{{ $waPhone }}?text={{ rawurlencode($waMessage) }}" target="_blank" rel="noopener">Send</a>
-                                    <button class="secondary copy-link" type="button" data-copy-link="{{ $invitationUrl }}">Salin link</button>
+                                    <a class="button" href="https://wa.me/{{ $waPhone }}?text={{ rawurlencode($waMessage) }}" target="_blank" rel="noopener">WhatsApp</a>
+                                    <button class="secondary" type="button" data-copy-text="{{ $waMessage }}">Salin Pesan</button>
                                     <form method="post" action="{{ route('admin.invitations.destroy', $guest) }}" onsubmit="return confirm('Hapus undangan {{ $guest->name }}? RSVP terkait juga akan terhapus.')">
                                         @csrf @method('delete')
-                                        <button class="danger" type="submit">Hapus</button>
+                                        <button class="danger" type="submit" aria-label="Hapus undangan {{ $guest->name }}" title="Hapus undangan">
+                                            <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2m3 0-.9 14H5.9L5 6m4 4v6m6-6v6"/></svg>
+                                        </button>
                                     </form>
                                 </div>
                             </td>
@@ -142,16 +144,15 @@
 </main>
 <script>
     document.addEventListener('click', async (event) => {
-        const button = event.target.closest('[data-copy-link]');
+        const button = event.target.closest('[data-copy-text]');
         if (!button) return;
 
-        const link = button.dataset.copyLink;
         try {
             if (navigator.clipboard && window.isSecureContext) {
-                await navigator.clipboard.writeText(link);
+                await navigator.clipboard.writeText(button.dataset.copyText);
             } else {
                 const input = document.createElement('textarea');
-                input.value = link;
+                input.value = button.dataset.copyText;
                 input.style.position = 'fixed';
                 input.style.opacity = '0';
                 document.body.appendChild(input);
@@ -161,12 +162,11 @@
                 if (!copied) throw new Error('Clipboard unavailable');
             }
 
-            const originalLabel = button.textContent;
             button.textContent = 'Tersalin';
-            window.setTimeout(() => { button.textContent = originalLabel; }, 1600);
+            window.setTimeout(() => { button.textContent = 'Salin Pesan'; }, 1600);
         } catch {
             button.textContent = 'Gagal menyalin';
-            window.setTimeout(() => { button.textContent = 'Salin link'; }, 1600);
+            window.setTimeout(() => { button.textContent = 'Salin Pesan'; }, 1600);
         }
     });
 </script>
